@@ -12,10 +12,10 @@ import { useModal } from "@/hooks/use-modal-store";
 import { Button } from "@/components/ui/button";
 import { DoorOpen, Plus } from "lucide-react";
 
-export const SidebarInitialModal = () => {
+export const ServerModal = () => {
   const { isOpen, onClose, onOpen, type } = useModal();
 
-  const isModalOpen = isOpen && type === "sidebar";
+  const isModalOpen = isOpen && type === "serverModal";
 
   const handleClose = () => {
     onClose();

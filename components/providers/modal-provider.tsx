@@ -7,7 +7,7 @@ import { EditServerModal } from "@/components/modals/edit-server-modal";
 import { MembersModal } from "@/components/modals/members-modal";
 import { CreateChannelModal } from "@/components/modals/create-channel-modal";
 import { JoinServerModal } from "@/components/modals/join-server-modal";
-import { SidebarInitialModal } from "@/components/modals/sidebar-initial-model";
+import { ServerModal } from "@/components/modals/server-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -27,7 +27,7 @@ export const ModalProvider = () => {
       <MembersModal />
       <CreateChannelModal />
       <JoinServerModal />
-      <SidebarInitialModal />
+      <ServerModal />
     </>
   );
 };
