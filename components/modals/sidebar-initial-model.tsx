@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { useModal } from "@/hooks/use-modal-store";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { DoorOpen, Plus } from "lucide-react";
 
 export const SidebarInitialModal = () => {
@@ -35,6 +35,7 @@ export const SidebarInitialModal = () => {
         <div className="mt-8 flex justify-center space-x-4">
           <Button
             onClick={() => onOpen("joinServer")}
+            variant={"primary"}
             className="h-12 w-36 text-sm font-semibold"
           >
             <DoorOpen className="mr-2 h-5 w-5" />
@@ -42,6 +43,7 @@ export const SidebarInitialModal = () => {
           </Button>
           <Button
             onClick={() => onOpen("createServer")}
+            variant={"primary"}
             className="h-12 w-36 text-sm font-semibold"
           >
             <Plus className="mr-2 h-5 w-5" />
