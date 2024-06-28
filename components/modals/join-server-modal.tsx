@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -23,11 +22,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import { CircleX } from "lucide-react";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
+import { useEffect, useState } from "react";
 
 const formSchema = z.object({
   inviteLink: z.string().min(1, {
@@ -38,8 +40,16 @@ const formSchema = z.object({
 export const JoinServerModal = () => {
   const { isOpen, onClose, type } = useModal();
   const router = useRouter();
-
   const isModalOpen = isOpen && type === "joinServer";
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    if (errorMessage) {
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+    }
+  }, [errorMessage]);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -51,15 +61,16 @@ export const JoinServerModal = () => {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      const inviteId = values.inviteLink.split("/").pop();
+    const inviteId = values.inviteLink.split("/").pop() as string;
+    const response = await fetch(`/invite/${inviteId}`);
+    console.log("[RESPONSE]", response);
+    if (response.ok) {
       router.push(`/invite/${inviteId}`);
-
       form.reset();
       router.refresh();
       onClose();
-    } catch (error) {
-      console.error("Error joining server: ", error);
+    } else {
+      setErrorMessage("Invalid invite link.");
     }
   };
 
@@ -99,13 +110,25 @@ export const JoinServerModal = () => {
                         {...field}
                       />
                     </FormControl>
+                    {errorMessage && (
+                      <div className="px-2">
+                        <div className="flex items-center gap-1 text-sm text-red-500">
+                          <CircleX className="h-4 w-4" />
+                          {errorMessage}
+                        </div>
+                      </div>
+                    )}
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
             <DialogFooter className="p4 bg-gray-100 px-6">
-              <Button variant={"primary"} disabled={isLoading}>
+              <Button
+                variant={"primary"}
+                disabled={isLoading}
+                className="w-full"
+              >
                 Join
               </Button>
             </DialogFooter>

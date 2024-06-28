@@ -80,7 +80,7 @@ export const InviteModal = () => {
             disabled={isLoading}
             variant={"link"}
             size={"sm"}
-            className="mt-4 text-xs text-zinc-500"
+            className="ml-0 mt-4 text-xs text-zinc-500"
           >
             Generate a new link
             <RefreshCw className="ml-2 h-4 w-4" />
