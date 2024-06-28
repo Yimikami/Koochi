@@ -12,11 +12,17 @@ import { useModal } from "@/hooks/use-modal-store";
 import { Button } from "../ui/button";
 import { DoorOpen, Plus } from "lucide-react";
 
-export const InitialModal = () => {
-  const { onOpen } = useModal();
+export const SidebarInitialModal = () => {
+  const { isOpen, onClose, onOpen, type } = useModal();
+
+  const isModalOpen = isOpen && type === "sidebar";
+
+  const handleClose = () => {
+    onClose();
+  };
 
   return (
-    <Dialog open>
+    <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className="overflow-hidden bg-white p-0 pb-5 text-black">
         <DialogHeader className="px-6 pt-8">
           <DialogTitle className="text-center text-2xl font-bold">

@@ -26,30 +26,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Server name is required.",
-  }),
-  imageUrl: z.string().min(1, {
-    message: "Server image is required.",
+  inviteLink: z.string().min(1, {
+    message: "Server invite link is required.",
   }),
 });
 
-export const CreateServerModal = () => {
+export const JoinServerModal = () => {
   const { isOpen, onClose, type } = useModal();
   const router = useRouter();
 
-  const isModalOpen = isOpen && type === "createServer";
+  const isModalOpen = isOpen && type === "joinServer";
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      imageUrl: "",
+      inviteLink: "",
     },
   });
 
@@ -57,13 +52,14 @@ export const CreateServerModal = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post("/api/servers", values);
+      const inviteId = values.inviteLink.split("/").pop();
+      router.push(`/invite/${inviteId}`);
 
       form.reset();
       router.refresh();
       onClose();
     } catch (error) {
-      console.error("Error creating server: ", error);
+      console.error("Error joining server: ", error);
     }
   };
 
@@ -77,47 +73,29 @@ export const CreateServerModal = () => {
       <DialogContent className="overflow-hidden bg-white p-0 pb-5 text-black">
         <DialogHeader className="px-6 pt-8">
           <DialogTitle className="text-center text-2xl font-bold">
-            Customize your server
+            Join a server
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            Give your server a personality with a name and an image. You can
-            always change it later.
+            To join a server, enter the invite link.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="space-y-8 px-6">
-              <div className="flex items-center justify-center text-center">
-                <FormField
-                  control={form.control}
-                  name="imageUrl"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <FileUpload
-                          endpoint="serverImage"
-                          value={field.value}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </div>
               <FormField
                 control={form.control}
-                name="name"
+                name="inviteLink"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-xs font-bold uppercase text-zinc-500 dark:text-secondary/70">
-                      Server Name
+                      Invite Link
                     </FormLabel>
                     <FormControl>
                       <Input
                         disabled={isLoading}
                         className="border-0 bg-zinc-300/50 text-black focus-visible:ring-0
                           focus-visible:ring-offset-0"
-                        placeholder="Enter server name"
+                        placeholder="Enter the invite link"
                         {...field}
                       />
                     </FormControl>
@@ -128,7 +106,7 @@ export const CreateServerModal = () => {
             </div>
             <DialogFooter className="p4 bg-gray-100 px-6">
               <Button variant={"primary"} disabled={isLoading}>
-                Create
+                Join
               </Button>
             </DialogFooter>
           </form>
