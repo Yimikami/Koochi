@@ -65,8 +65,8 @@ export const JoinServerModal = () => {
     const response = await fetch(`/invite/${inviteId}`);
     console.log("[RESPONSE]", response);
     if (response.ok) {
-      router.push(`/invite/${inviteId}`);
       form.reset();
+      router.push(`/invite/${inviteId}`);
       router.refresh();
       onClose();
     } else {

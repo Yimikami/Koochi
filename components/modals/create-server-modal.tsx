@@ -57,9 +57,10 @@ export const CreateServerModal = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post("/api/servers", values);
+      const response = await axios.post("/api/servers", values);
 
       form.reset();
+      router.push(`/servers/${response.data.id}`);
       router.refresh();
       onClose();
     } catch (error) {
@@ -100,6 +101,7 @@ export const CreateServerModal = () => {
                           onChange={field.onChange}
                         />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
