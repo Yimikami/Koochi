@@ -6,7 +6,8 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { NavigationItem } from "./navigation-item";
 import { ModeToggle } from "../mode-toggle";
-import { UserButton } from "@clerk/nextjs";
+import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
+import { Loader2 } from "lucide-react";
 
 export const NavigationSideBar = async () => {
   const profile = await currentProfile();
@@ -45,14 +46,19 @@ export const NavigationSideBar = async () => {
       </ScrollArea>
       <div className="mt-auto flex flex-col items-center gap-y-4 pb-3">
         <ModeToggle />
-        <UserButton
-          afterSignOutUrl="/"
-          appearance={{
-            elements: {
-              avatarBox: "h-[48px] w-[48px]",
-            },
-          }}
-        />
+        <ClerkLoading>
+          <Loader2 className="h-8 w-8 animate-spin text-primary dark:text-primary" />
+        </ClerkLoading>
+        <ClerkLoaded>
+          <UserButton
+            afterSignOutUrl="/"
+            appearance={{
+              elements: {
+                avatarBox: "h-[48px] w-[48px]",
+              },
+            }}
+          />
+        </ClerkLoaded>
       </div>
     </div>
   );
