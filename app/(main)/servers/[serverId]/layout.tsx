@@ -34,12 +34,14 @@ const ServerIdLayout = async ({
   }
 
   return (
-    <div className="h-full">
-      <div className="fixed inset-y-0 z-20 hidden h-full w-60 flex-col md:flex">
+    <div className="flex h-full">
+      <div className="hidden h-full w-60 flex-col md:flex">
         <ServerSidebar serverId={params.serverId} />
       </div>
-      <main className="h-full md:pl-60">{children}</main>
-      <div className="fixed inset-y-0 right-0 z-20 hidden h-full w-60 flex-col md:flex">
+      <main className="flex h-full flex-1">
+        <div className="flex-1">{children}</div>
+      </main>
+      <div className="hidden h-full w-60 flex-col md:flex">
         <ServerSidebarRight serverId={params.serverId} />
       </div>
     </div>
