@@ -38,7 +38,7 @@ const formSchema = z.object({
 });
 
 export const JoinServerModal = () => {
-  const { isOpen, onClose, type } = useModal();
+  const { isOpen, onClose, onOpen, type } = useModal();
   const router = useRouter();
   const isModalOpen = isOpen && type === "joinServer";
   const [errorMessage, setErrorMessage] = useState("");
@@ -81,7 +81,7 @@ export const JoinServerModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="overflow-hidden bg-white p-0 pb-5 text-black">
+      <DialogContent className="overflow-hidden bg-white p-0 text-black">
         <DialogHeader className="px-6 pt-8">
           <DialogTitle className="text-center text-2xl font-bold">
             Join a server
@@ -123,14 +123,18 @@ export const JoinServerModal = () => {
                 )}
               />
             </div>
-            <DialogFooter className="p4 bg-gray-100 px-6">
-              <Button
-                variant={"primary"}
-                disabled={isLoading}
-                className="w-full"
-              >
-                Join
-              </Button>
+            <DialogFooter className="bg-gray-100 p-2 px-6">
+              <div className="flex w-full justify-between">
+                <Button
+                  className="bg-gray-100 text-black hover:bg-gray-200"
+                  onClick={() => onOpen("serverModal")}
+                >
+                  Back
+                </Button>
+                <Button variant={"primary"} disabled={isLoading}>
+                  Join Server
+                </Button>
+              </div>
             </DialogFooter>
           </form>
         </Form>

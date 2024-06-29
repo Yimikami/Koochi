@@ -51,7 +51,10 @@ export const ServerSidebarRight = async ({ serverId }: ServerSidebarProps) => {
   )?.role;
 
   return (
-    <div className="flex h-full w-full flex-col bg-[#F2F3F5] text-primary dark:bg-[#2B2D31]">
+    <div
+      className="flex h-full w-full flex-col border-b-2 border-neutral-200 bg-[#F2F3F5] px-3
+        font-semibold text-primary dark:border-neutral-800 dark:bg-[#2B2D31]"
+    >
       <ScrollArea className="flex-1 px-3 pt-2">
         {!!members?.length && (
           <div className="mb-2">

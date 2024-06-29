@@ -10,7 +10,7 @@ import {
 
 import { useModal } from "@/hooks/use-modal-store";
 import { Button } from "@/components/ui/button";
-import { DoorOpen, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 
 export const InitialModal = () => {
   const { onOpen } = useModal();
@@ -20,28 +20,41 @@ export const InitialModal = () => {
       <DialogContent className="overflow-hidden bg-white p-0 pb-5 text-black">
         <DialogHeader className="px-6 pt-8">
           <DialogTitle className="text-center text-2xl font-bold">
-            Join or Create a server
+            Create a Server
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            To get started, join or create a server.
+            Your server is where you and your friends hang out. Make yours and
+            start talking.
           </DialogDescription>
         </DialogHeader>
-        <div className="mt-8 flex justify-center space-x-4">
-          <Button
-            onClick={() => onOpen("joinServer")}
-            variant={"primary"}
-            className="h-12 w-36 text-sm font-semibold"
-          >
-            <DoorOpen className="mr-2 h-5 w-5" />
-            Join Server
-          </Button>
-          <Button
+        <div className="mt-3 flex justify-center space-x-4">
+          <div
             onClick={() => onOpen("createServer")}
-            variant={"primary"}
-            className="h-12 w-36 text-sm font-semibold"
+            className="flex w-[85%] cursor-pointer items-center rounded-[16px] border
+              border-neutral-200 p-4 hover:bg-neutral-100"
           >
-            <Plus className="mr-2 h-5 w-5" />
-            Create Server
+            <button className="group flex items-center">
+              <div
+                className="mx-3 flex h-[48px] w-[48px] items-center justify-center overflow-hidden
+                  rounded-[24px] border border-emerald-500"
+              >
+                <Plus className="text-emerald-500" size={25} />
+              </div>
+            </button>
+            <p className="mt-2 font-semibold text-black">Create My Own</p>
+          </div>
+        </div>
+        <DialogTitle className="mt-2 text-center font-bold">
+          Have an invite already?
+        </DialogTitle>
+        <div className="flex justify-center space-x-4">
+          <Button
+            className="mt-2 w-[85%] bg-zinc-600 font-semibold text-white hover:bg-zinc-500"
+            onClick={() => onOpen("joinServer")}
+          >
+            <div className="flex items-center justify-center">
+              Join a Server
+            </div>
           </Button>
         </div>
       </DialogContent>

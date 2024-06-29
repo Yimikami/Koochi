@@ -40,7 +40,7 @@ const formSchema = z.object({
 });
 
 export const CreateServerModal = () => {
-  const { isOpen, onClose, type } = useModal();
+  const { isOpen, onClose, onOpen, type } = useModal();
   const router = useRouter();
 
   const isModalOpen = isOpen && type === "createServer";
@@ -128,14 +128,18 @@ export const CreateServerModal = () => {
                 )}
               />
             </div>
-            <DialogFooter className="p4 bg-gray-100 px-6">
-              <Button
-                className="w-full"
-                variant={"primary"}
-                disabled={isLoading}
-              >
-                Create
-              </Button>
+            <DialogFooter className="bg-gray-100 p-2 px-6">
+              <div className="flex w-full justify-between">
+                <Button
+                  className="bg-gray-100 text-black hover:bg-gray-200"
+                  onClick={() => onOpen("serverModal")}
+                >
+                  Back
+                </Button>
+                <Button variant={"primary"} disabled={isLoading}>
+                  Create Server
+                </Button>
+              </div>
             </DialogFooter>
           </form>
         </Form>
