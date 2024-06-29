@@ -2,11 +2,32 @@ import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { ChannelType, MemberRole } from "@prisma/client";
 import { redirect } from "next/navigation";
+import { ServerHeader } from "./server-header";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { ServerSearch } from "./server-search";
+import { ServerSection } from "./server-section";
+import { Separator } from "../ui/separator";
+import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
+import { ServerChannel } from "./server-channel";
+import { ServerMember } from "./server-members";
 
 interface ServerSidebarProps {
   serverId: string;
 }
+
+const iconMap = {
+  [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
+  [ChannelType.AUDIO]: <Mic className="mr-2 h-4 w-4" />,
+  [ChannelType.VIDEO]: <Video className="mr-2 h-4 w-4" />,
+};
+
+const roleIconMap = {
+  [MemberRole.GUEST]: null,
+  [MemberRole.MODERATOR]: (
+    <ShieldCheck className="mr-2 h-4 w-4 text-indigo-500" />
+  ),
+  [MemberRole.ADMIN]: <ShieldAlert className="mr-2 h-4 w-4 text-rose-500" />,
+};
 
 export const ServerSidebarRight = async ({ serverId }: ServerSidebarProps) => {
   const profile = await currentProfile();
@@ -59,7 +80,24 @@ export const ServerSidebarRight = async ({ serverId }: ServerSidebarProps) => {
 
   return (
     <div className="flex h-full w-full flex-col bg-[#F2F3F5] text-primary dark:bg-[#2B2D31]">
-      <ScrollArea className="flex-1 px-3"></ScrollArea>
+      <ScrollArea className="flex-1 px-3 pt-2">
+        {!!members?.length && (
+          <div className="mb-2">
+            <ServerSection
+              sectionType="members"
+              role={role}
+              label="Members"
+              server={server}
+            />
+            <Separator className="my-2 rounded-md bg-zinc-200 dark:bg-zinc-700" />
+            <div className="space-y-[2px]">
+              {members.map((member) => (
+                <ServerMember key={member.id} member={member} server={server} />
+              ))}
+            </div>
+          </div>
+        )}
+      </ScrollArea>
     </div>
   );
 };
