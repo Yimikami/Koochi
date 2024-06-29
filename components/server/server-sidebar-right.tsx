@@ -3,7 +3,6 @@ import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ServerSection } from "./server-section";
-import { Separator } from "../ui/separator";
 import { ServerMember } from "./server-members";
 
 interface ServerSidebarProps {

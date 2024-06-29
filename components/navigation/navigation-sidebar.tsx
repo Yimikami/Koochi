@@ -6,9 +6,10 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { NavigationItem } from "./navigation-item";
 import { ModeToggle } from "@/components/mode-toggle";
-import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
+import { ClerkLoading, UserButton } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react";
 import { NavigationHomeButton } from "./navigation-home-button";
+import { SocketIndicator } from "@/components/socket-indicator";
 
 export const NavigationSideBar = async () => {
   const profile = await currentProfile();
@@ -53,20 +54,20 @@ export const NavigationSideBar = async () => {
       </ScrollArea>
 
       <div className="mt-auto flex flex-col items-center gap-y-4 pb-3">
+        <Separator className="mx-auto h-[2px] w-10 rounded-md bg-zinc-300 dark:bg-zinc-700" />
+        <SocketIndicator />
         <ModeToggle />
         <ClerkLoading>
           <Loader2 className="h-8 w-8 animate-spin text-primary dark:text-primary" />
         </ClerkLoading>
-        <ClerkLoaded>
-          <UserButton
-            afterSignOutUrl="/"
-            appearance={{
-              elements: {
-                avatarBox: "h-[48px] w-[48px]",
-              },
-            }}
-          />
-        </ClerkLoaded>
+        <UserButton
+          afterSignOutUrl="/"
+          appearance={{
+            elements: {
+              avatarBox: "h-[48px] w-[48px]",
+            },
+          }}
+        />
       </div>
     </div>
   );
