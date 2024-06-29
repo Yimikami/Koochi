@@ -4,8 +4,9 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { NavigationSideBar } from "@/components/navigation/navigation-sidebar";
 import { ServerSidebar } from "@/components/server/server-sidebar";
+import { HomeSidebar } from "./home/home-sidebar";
 
-export const MobileToggle = ({ serverId }: { serverId: string }) => {
+export const MobileToggle = ({ serverId }: { serverId?: string }) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -17,7 +18,7 @@ export const MobileToggle = ({ serverId }: { serverId: string }) => {
         <div className="w-[72px]">
           <NavigationSideBar />
         </div>
-        <ServerSidebar serverId={serverId} />
+        {serverId ? <ServerSidebar serverId={serverId} /> : <HomeSidebar />}
       </SheetContent>
     </Sheet>
   );

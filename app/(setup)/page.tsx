@@ -1,3 +1,4 @@
+import { HomeHeader } from "@/components/home/home-header";
 import { HomeSidebar } from "@/components/home/home-sidebar";
 import { NavigationSideBar } from "@/components/navigation/navigation-sidebar";
 
@@ -9,8 +10,13 @@ const SetupPage = async () => {
       </div>
       <main className="h-full md:pl-[72px]">
         <div className="h-full">
-          <HomeSidebar />
+          <div className="fixed inset-y-0 z-20 hidden h-full w-60 flex-col md:flex">
+            <HomeSidebar />
+          </div>
           <main className="h-full md:pl-60">
+            <div className="flex h-full flex-col bg-white dark:bg-[#313338]">
+              <HomeHeader />
+            </div>
             <div className="flex h-full items-center justify-center">
               <div className="text-center">
                 Welcome to Koochi! <br /> You can create a channel, invite
