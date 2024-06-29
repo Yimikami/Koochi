@@ -52,9 +52,9 @@ export const ServerSidebarRight = async ({ serverId }: ServerSidebarProps) => {
 
   return (
     <div className="flex h-full w-full flex-col bg-[#F2F3F5] text-primary dark:bg-[#2B2D31]">
-      <button
-        className="text-md h-12 w-full cursor-default items-center border-b-2 border-neutral-200
-          px-3 font-semibold dark:border-neutral-800"
+      <div
+        className="h-12 w-full cursor-default border-b-2 border-neutral-200 px-3 pt-4 font-sans
+          text-sm dark:border-neutral-800"
       >
         <ServerSection
           sectionType="members"
@@ -62,7 +62,7 @@ export const ServerSidebarRight = async ({ serverId }: ServerSidebarProps) => {
           label={`Members (${server?.members.length})`}
           server={server}
         />
-      </button>
+      </div>
 
       <ScrollArea className="flex-1 px-3">
         <div className="flex flex-col gap-y-2">
