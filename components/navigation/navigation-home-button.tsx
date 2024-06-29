@@ -4,13 +4,18 @@ import { Home, Plus } from "lucide-react";
 
 import { ActionTooltip } from "@/components/action-tooltip";
 import { useModal } from "@/hooks/use-modal-store";
+import { useRouter } from "next/navigation";
 
 export const NavigationHomeButton = () => {
   const { onOpen } = useModal();
+  const router = useRouter();
+  const onClick = () => {
+    router.push("/");
+  };
   return (
     <div>
       <ActionTooltip side="right" align="center" label="Koochi">
-        <button className="group flex items-center">
+        <button onClick={onClick} className="group flex items-center">
           <div
             className="mx-3 flex h-[48px] w-[48px] items-center justify-center overflow-hidden
               rounded-[24px] bg-background transition-all group-hover:rounded-[16px]

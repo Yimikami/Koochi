@@ -35,16 +35,20 @@ export const NavigationSideBar = async () => {
       <NavigationHomeButton />
       <Separator className="mx-auto h-[2px] w-10 rounded-md bg-zinc-300 dark:bg-zinc-700" />
       <ScrollArea className="w-full flex-1">
-        {servers.map((server) => (
-          <div key={server.id} className="mb-4">
-            <NavigationItem
-              id={server.id}
-              name={server.name}
-              imageUrl={server.imageUrl}
-            />
-          </div>
-        ))}
-        <Separator className="mx-auto mb-3 h-[2px] w-10 rounded-md bg-zinc-300 dark:bg-zinc-700" />
+        {!!servers.length && (
+          <>
+            {servers.map((server) => (
+              <div key={server.id} className="mb-4">
+                <NavigationItem
+                  id={server.id}
+                  name={server.name}
+                  imageUrl={server.imageUrl}
+                />
+              </div>
+            ))}
+            <Separator className="mx-auto mb-3 h-[2px] w-10 rounded-md bg-zinc-300 dark:bg-zinc-700" />
+          </>
+        )}
         <NavigationAction />
       </ScrollArea>
 
