@@ -56,17 +56,17 @@ export const ServerSidebarRight = async ({ serverId }: ServerSidebarProps) => {
         font-semibold text-primary dark:border-neutral-800 dark:bg-[#2B2D31]"
     >
       <ScrollArea className="flex-1 px-3 pt-2">
-        {!!members?.length && (
+        {!!server?.members?.length && (
           <div className="mb-2">
             <ServerSection
               sectionType="members"
               role={role}
-              label="Members"
+              label={`Members (${server?.members.length})`}
               server={server}
             />
             <Separator className="my-2 rounded-md bg-zinc-200 dark:bg-zinc-700" />
             <div className="space-y-[2px]">
-              {members.map((member) => (
+              {server?.members.map((member) => (
                 <ServerMember key={member.id} member={member} server={server} />
               ))}
             </div>
