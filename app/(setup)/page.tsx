@@ -16,14 +16,14 @@ const SetupPage = async () => {
           <main className="h-full md:pl-60">
             <div className="flex h-full flex-col bg-white dark:bg-[#313338]">
               <HomeHeader />
-            </div>
-            <div className="flex h-full items-center justify-center">
-              <div className="text-center">
-                Welcome to Koochi! <br /> You can create a channel, invite
-                friends, and start chatting or join a server.
-                <span className="mt-4 block text-sm text-gray-500">
-                  This project is a work in progress.
-                </span>
+              <div className="flex h-full items-center justify-center">
+                <div className="text-center">
+                  Welcome to Koochi! <br /> You can create a channel, invite
+                  friends, and start chatting or join a server.
+                  <span className="mt-4 block text-sm text-gray-500">
+                    This project is a work in progress.
+                  </span>
+                </div>
               </div>
             </div>
           </main>
