@@ -13,7 +13,7 @@ export const HomeSidebar = () => {
               py-1 transition hover:bg-zinc-700/10 dark:bg-zinc-900 dark:hover:bg-zinc-700/50"
           >
             <p
-              className="text-sm text-zinc-400 transition group-hover:text-zinc-600 dark:text-zinc-400
+              className="text-sm text-zinc-500 transition group-hover:text-zinc-600 dark:text-zinc-400
                 dark:group-hover:text-zinc-300"
             >
               Find or start a conversation
@@ -26,7 +26,8 @@ export const HomeSidebar = () => {
             <div className="mt-[1px] flex w-full items-center space-x-2">
               <button
                 className="group flex w-full items-center gap-x-3 rounded-md px-2 py-2 font-sans
-                  text-zinc-400 hover:bg-slate-200 dark:hover:bg-zinc-700 hover:dark:text-zinc-300"
+                  text-zinc-600 hover:bg-slate-200 dark:text-zinc-400 dark:hover:bg-zinc-700
+                  hover:dark:text-zinc-300"
               >
                 <User className="h-6 w-6" />
                 <p className="text-[15px]">Friends</p>
@@ -34,8 +35,9 @@ export const HomeSidebar = () => {
             </div>
             <div className="mt-[1px] flex items-center space-x-2">
               <button
-                className="group flex w-full items-center gap-x-3 rounded-md px-2 py-2 text-zinc-400
-                  hover:bg-slate-200 dark:hover:bg-zinc-700 hover:dark:text-zinc-300"
+                className="group flex w-full items-center gap-x-3 rounded-md px-2 py-2 font-sans
+                  text-zinc-600 hover:bg-slate-200 dark:text-zinc-400 dark:hover:bg-zinc-700
+                  hover:dark:text-zinc-300"
               >
                 <BadgeDollarSign className="h-6 w-6" />
                 <p className="text-[15px]">Nitro </p>
@@ -43,8 +45,9 @@ export const HomeSidebar = () => {
             </div>
             <div className="mt-[1px] flex items-center space-x-2">
               <button
-                className="group flex w-full items-center gap-x-3 rounded-md px-2 py-2 text-zinc-400
-                  hover:bg-slate-200 dark:hover:bg-zinc-700 hover:dark:text-zinc-300"
+                className="group flex w-full items-center gap-x-3 rounded-md px-2 py-2 font-sans
+                  text-zinc-600 hover:bg-slate-200 dark:text-zinc-400 dark:hover:bg-zinc-700
+                  hover:dark:text-zinc-300"
               >
                 <Mail className="h-6 w-6" />
                 <p className="text-[15px]">Message Requests</p>
@@ -52,8 +55,9 @@ export const HomeSidebar = () => {
             </div>
             <div className="mt-[1px] flex items-center space-x-2">
               <button
-                className="group flex w-full items-center gap-x-3 rounded-md px-2 py-2 text-zinc-400
-                  hover:bg-slate-200 dark:hover:bg-zinc-700 hover:dark:text-zinc-300"
+                className="group flex w-full items-center gap-x-3 rounded-md px-2 py-2 font-sans
+                  text-zinc-600 hover:bg-slate-200 dark:text-zinc-400 dark:hover:bg-zinc-700
+                  hover:dark:text-zinc-300"
               >
                 <Store className="h-6 w-6" />
                 <p className="text-[15px]">Shop</p>
