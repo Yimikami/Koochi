@@ -55,8 +55,6 @@ This is an ongoing project. There is still a lot of work to be done, and new fea
    cp .env.example .env
    ```
 
-4. Don't forget to do database migrations etc.
-
 ### Running the Application
 
 1. Start the development server:
