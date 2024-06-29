@@ -1,6 +1,5 @@
 import { MobileToggle } from "@/components/mobile-toggle";
 import { Home } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
 
 export const HomeHeader = () => {
   return (
@@ -18,10 +17,6 @@ export const HomeHeader = () => {
             <Home className="h-6 w-6" />
             <p className="text-[15px]">Home</p>
           </button>
-
-          <div className="flex items-center space-x-2 text-blue-500">
-            <Separator orientation="vertical" className="h-6 border-l-0" />
-          </div>
         </div>
       </div>
     </div>
