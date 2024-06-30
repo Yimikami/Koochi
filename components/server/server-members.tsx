@@ -9,6 +9,7 @@ import { UserAvatar } from "@/components/user-avatar";
 interface ServerMemberProps {
   member: Member & { profile: Profile };
   server: Server;
+  profileId: string;
 }
 
 const roleIconMap = {
@@ -19,13 +20,20 @@ const roleIconMap = {
   [MemberRole.ADMIN]: <ShieldAlert className="mr-2 h-4 w-4 text-rose-500" />,
 };
 
-export const ServerMember = ({ member, server }: ServerMemberProps) => {
+export const ServerMember = ({
+  member,
+  server,
+  profileId,
+}: ServerMemberProps) => {
   const params = useParams();
   const router = useRouter();
 
   const icon = roleIconMap[member.role];
 
   const onClick = () => {
+    if (member.profile.id === profileId) {
+      return;
+    }
     router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
   };
 

@@ -1,12 +1,9 @@
 import { db } from "@/lib/db";
 
-export const getOrCrateConversation = async (
+export const getOrCreateConversation = async (
   memberOneId: string,
   memberTwoId: string,
 ) => {
-  if (memberOneId === memberTwoId) {
-    return null;
-  }
 
   let conversation =
     (await findConversation(memberOneId, memberTwoId)) ||
