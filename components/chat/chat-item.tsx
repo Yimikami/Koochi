@@ -56,7 +56,8 @@ export const ChatItem = ({
   isUpdated,
   socketUrl,
   socketQuery,
-}: ChatItemProps) => {
+  sameUser = false,
+}: ChatItemProps & { sameUser?: boolean }) => {
   const [isEditing, setIsEditing] = useState(false);
   const { onOpen } = useModal();
   const params = useParams();
@@ -124,31 +125,45 @@ export const ChatItem = ({
   const isImage = !isPDF && fileUrl;
 
   return (
-    <div className="group relative flex w-full items-center p-4 transition hover:bg-black/5">
+    <div
+      className={cn(
+        "group relative flex w-full items-center p-4 pb-[4px] transition hover:bg-black/5",
+        sameUser && "p-0 pb-[4px]",
+      )}
+    >
       <div className="group flex w-full items-start gap-x-2">
-        <div
-          onClick={onMemberClick}
-          className="cursor-pointer transition hover:drop-shadow-md"
-        >
-          <UserAvatar src={member.profile.imageUrl} />
-        </div>
-        <div className="flex w-full flex-col">
-          <div className="flex items-center gap-x-2">
-            <div className="flex items-center">
-              <p
-                onClick={onMemberClick}
-                className="cursor-pointer text-sm font-semibold hover:underline"
-              >
-                {member.profile.name.split(" ")[0]}
-              </p>
-              <ActionTooltip label={member.role}>
-                {roleIconMap[member.role]}
-              </ActionTooltip>
-            </div>
-            <span className="text-xs text-zinc-500 dark:text-zinc-400">
-              {timestamp}
-            </span>
+        {!sameUser && (
+          <div
+            onClick={onMemberClick}
+            className="cursor-pointer transition hover:drop-shadow-md"
+          >
+            <UserAvatar src={member.profile.imageUrl} />
           </div>
+        )}
+        <div
+          className={cn(
+            "flex w-full flex-col",
+            (isImage || isPDF) && sameUser && "pl-14 md:pl-16",
+          )}
+        >
+          {!sameUser && (
+            <div className="flex items-center gap-x-2">
+              <div className="flex items-center">
+                <p
+                  onClick={onMemberClick}
+                  className="cursor-pointer text-sm font-semibold hover:underline"
+                >
+                  {member.profile.name.split(" ")[0]}
+                </p>
+                <ActionTooltip label={member.role}>
+                  {roleIconMap[member.role]}
+                </ActionTooltip>
+              </div>
+              <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                {timestamp}
+              </span>
+            </div>
+          )}
           {isImage && (
             <a
               href={fileUrl}
@@ -157,6 +172,14 @@ export const ChatItem = ({
               className="relative mt-2 flex aspect-square h-48 w-48 items-center overflow-hidden
                 rounded-md border bg-secondary"
             >
+              {sameUser && (
+                <span
+                  className="mr-[7px] text-[10px] font-semibold text-white group-hover:text-zinc-600
+                    dark:text-[#313338] group-hover:dark:text-zinc-400 md:mr-[19px]"
+                >
+                  {timestamp}
+                </span>
+              )}
               <Image
                 src={fileUrl}
                 alt={content}
@@ -184,10 +207,19 @@ export const ChatItem = ({
             <p
               className={cn(
                 "text-sm text-zinc-600 dark:text-zinc-300",
+                sameUser && "mt-0 pl-5",
                 deleted &&
                   "mt-1 text-xs italic text-zinc-500 dark:text-zinc-400",
               )}
             >
+              {sameUser && (
+                <span
+                  className="mr-[7px] text-[10px] font-semibold text-white group-hover:text-zinc-600
+                    dark:text-[#313338] group-hover:dark:text-zinc-400 md:mr-[19px]"
+                >
+                  {timestamp}
+                </span>
+              )}
               {content}
               {isUpdated && !deleted && (
                 <span className="mx-2 text-[10px] text-zinc-500 dark:text-zinc-400">
@@ -199,7 +231,10 @@ export const ChatItem = ({
           {!fileUrl && isEditing && (
             <Form {...form}>
               <form
-                className="flex w-full items-center gap-x-2 pt-2"
+                className={cn(
+                  "mt-2 flex w-full items-center gap-x-2 pt-2",
+                  sameUser && "pl-14 md:pl-16",
+                )}
                 onSubmit={form.handleSubmit(onSubmit)}
               >
                 <FormField
@@ -225,14 +260,19 @@ export const ChatItem = ({
                   Save
                 </Button>
               </form>
-              <span className="mt-1 text-[10px] text-zinc-400">
+              <span
+                className={cn(
+                  "text-xs text-zinc-500 dark:text-zinc-400",
+                  sameUser && "pl-14 md:pl-16",
+                )}
+              >
                 Press escape to cancel, enter to save
               </span>
             </Form>
           )}
         </div>
       </div>
-      {canDeleteMessage && (
+      {canDeleteMessage && !isEditing && (
         <div
           className="bg-whit absolute -top-2 right-5 hidden items-center gap-x-2 rounded-sm border
             p-1 group-hover:flex dark:bg-zinc-800"

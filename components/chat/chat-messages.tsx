@@ -5,10 +5,11 @@ import { ChatWelcome } from "./chat-welcome";
 import { useChatQuery } from "@/hooks/use-chat-query";
 import { Loader2, ServerCrash } from "lucide-react";
 import { Fragment } from "react";
-import { format } from "date-fns";
+import { differenceInMinutes, format } from "date-fns";
 import { ChatItem } from "./chat-item";
+import { useChatSocket } from "@/hooks/use-chat-socket";
 
-const DATE_FORMAT = "d MMM yyyy, HH:mm";
+let DATE_FORMAT = "";
 
 type MessageWithMemberWithProfile = Message & {
   member: Member & {
@@ -40,6 +41,9 @@ export const ChatMessages = ({
   type,
 }: ChatMessagesProps) => {
   const queryKey = `chat:${chatId}`;
+  const addKey = `chat:${chatId}:messages`;
+  const updateKey = `chat:${chatId}:messages:update`;
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useChatQuery({
       queryKey,
@@ -47,6 +51,8 @@ export const ChatMessages = ({
       paramKey,
       paramValue,
     });
+
+  useChatSocket({ queryKey, addKey, updateKey });
 
   if (status === "pending") {
     return (
@@ -77,21 +83,58 @@ export const ChatMessages = ({
       <div className="mt-auto flex flex-col-reverse">
         {data?.pages?.map((group, i) => (
           <Fragment key={i}>
-            {group.items.map((message: MessageWithMemberWithProfile) => (
-              <ChatItem
-                key={message.id}
-                id={message.id}
-                currentMember={member}
-                member={message.member}
-                content={message.content}
-                fileUrl={message.fileUrl}
-                deleted={message.deleted}
-                timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
-                isUpdated={message.updatedAt !== message.createdAt}
-                socketUrl={socketUrl}
-                socketQuery={socketQuery}
-              />
-            ))}
+            {group.items.map(
+              (
+                message: MessageWithMemberWithProfile,
+                index: number,
+                arr: any[],
+              ) => {
+                const previousMessage = arr[index + 1];
+
+                let sameUser =
+                  previousMessage &&
+                  previousMessage.member.profile.name ===
+                    message.member.profile.name;
+
+                let timeDifference = 0;
+                if (previousMessage && sameUser) {
+                  const currentMessageDate = new Date(message.createdAt);
+                  const previousMessageDate = new Date(
+                    previousMessage.createdAt,
+                  );
+                  timeDifference = differenceInMinutes(
+                    currentMessageDate,
+                    previousMessageDate,
+                  );
+                }
+
+                if (timeDifference > 1) {
+                  sameUser = false;
+                }
+
+                if (sameUser) {
+                  DATE_FORMAT = "HH:mm";
+                } else {
+                  DATE_FORMAT = "d MMM yyyy, HH:mm";
+                }
+                return (
+                  <ChatItem
+                    key={message.id}
+                    id={message.id}
+                    currentMember={member}
+                    member={message.member}
+                    content={message.content}
+                    fileUrl={message.fileUrl}
+                    deleted={message.deleted}
+                    timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
+                    isUpdated={message.updatedAt !== message.createdAt}
+                    socketUrl={socketUrl}
+                    socketQuery={socketQuery}
+                    sameUser={sameUser}
+                  />
+                );
+              },
+            )}
           </Fragment>
         ))}
       </div>
