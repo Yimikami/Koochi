@@ -1,6 +1,6 @@
 "use client";
 
-import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Image from "next/image";
 import { useModal } from "@/hooks/use-modal-store";
 
@@ -8,19 +8,17 @@ export const OpenImageModal = () => {
   const { isOpen, onClose, type, data } = useModal();
 
   const isModalOpen = isOpen && type === "openImage";
-  const fileUrl = data?.fileUrl ?? "";
+  const { fileUrl, content } = data;
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="flex items-center justify-center border-none bg-transparent p-4">
-        {fileUrl ? (
+        {fileUrl && content ? (
           <div className="relative h-auto max-h-full w-auto max-w-full">
             <Image
               src={fileUrl}
-              alt="Image"
-              layout="intrinsic"
+              alt={content}
               quality={100}
-              className="object-contain"
               width={800}
               height={600}
             />

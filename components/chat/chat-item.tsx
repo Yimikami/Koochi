@@ -166,16 +166,14 @@ export const ChatItem = ({
           )}
           {isImage && (
             <a
-              onClick={() => onOpen("openImage", { fileUrl })}
+              onClick={() => onOpen("openImage", { fileUrl, content })}
               className="max-h-auto relative mt-2 flex max-w-[300px] items-center overflow-hidden
                 rounded-md border bg-secondary"
             >
               <Image
                 src={fileUrl}
                 alt={content}
-                layout="intrinsic"
                 quality={100}
-                className="object-contain"
                 width={800}
                 height={600}
               />

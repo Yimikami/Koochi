@@ -24,6 +24,7 @@ interface ModalData {
   apiUrl?: string;
   query?: Record<string, any>;
   fileUrl?: string;
+  content?: string;
 }
 
 interface ModalStore {
