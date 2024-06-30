@@ -166,27 +166,18 @@ export const ChatItem = ({
           )}
           {isImage && (
             <a
-              href={fileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative mt-2 flex aspect-square h-48 w-48 items-center overflow-hidden
+              onClick={() => onOpen("openImage", { fileUrl })}
+              className="max-h-auto relative mt-2 flex max-w-[300px] items-center overflow-hidden
                 rounded-md border bg-secondary"
             >
-              {sameUser && (
-                <span
-                  className="mr-[7px] text-[10px] font-semibold text-white group-hover:text-zinc-600
-                    dark:text-[#313338] group-hover:dark:text-zinc-400 md:mr-[19px]"
-                >
-                  {timestamp}
-                </span>
-              )}
               <Image
                 src={fileUrl}
                 alt={content}
-                fill
-                sizes="48"
-                priority
-                className="object-cover"
+                layout="intrinsic"
+                quality={100}
+                className="object-contain"
+                width={800}
+                height={600}
               />
             </a>
           )}

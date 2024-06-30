@@ -14,7 +14,8 @@ export type ModalType =
   | "deleteChannel"
   | "editChannel"
   | "messageFile"
-  | "deleteMessage";
+  | "deleteMessage"
+  | "openImage";
 
 interface ModalData {
   server?: Server;
@@ -22,6 +23,7 @@ interface ModalData {
   channelType?: ChannelType;
   apiUrl?: string;
   query?: Record<string, any>;
+  fileUrl?: string;
 }
 
 interface ModalStore {

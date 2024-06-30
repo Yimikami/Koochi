@@ -1,13 +1,11 @@
 "use client";
 
-import { Home, Plus } from "lucide-react";
+import { Home } from "lucide-react";
 
 import { ActionTooltip } from "@/components/action-tooltip";
-import { useModal } from "@/hooks/use-modal-store";
 import { useRouter } from "next/navigation";
 
 export const NavigationHomeButton = () => {
-  const { onOpen } = useModal();
   const router = useRouter();
   const onClick = () => {
     router.push("/");

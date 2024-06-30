@@ -14,9 +14,36 @@ interface FileUploadProps {
 export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
   const fileType = value?.split(".").pop();
   if (value && fileType !== "pdf") {
+    if (endpoint === "messageFile") {
+      return (
+        <div className="max-h-auto relative max-w-[300px]">
+          <Image
+            src={value}
+            alt="Upload"
+            layout="intrinsic"
+            width={300}
+            height={300}
+            className="object-contain"
+          />
+          <button
+            onClick={() => onChange("")}
+            className="absolute right-0 top-0 rounded-full bg-rose-500 p-1 text-white shadow-sm"
+            type="button"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      );
+    }
+
     return (
       <div className="relative h-20 w-20">
-        <Image fill src={value} alt="Upload" className="rounded-full" />
+        <Image
+          fill
+          src={value}
+          alt="Upload"
+          className="rounded-full object-cover"
+        />
         <button
           onClick={() => onChange("")}
           className="absolute right-0 top-0 rounded-full bg-rose-500 p-1 text-white shadow-sm"
