@@ -68,7 +68,12 @@ export const ServerSidebarRight = async ({ serverId }: ServerSidebarProps) => {
           <div className="mt-[1px] flex items-center space-x-2">
             <div className="w-full space-y-[2px]">
               {server?.members.map((member) => (
-                <ServerMember key={member.id} member={member} profileId={profile.id} server={server} />
+                <ServerMember
+                  key={member.id}
+                  member={member}
+                  profileId={profile.id}
+                  server={server}
+                />
               ))}
             </div>
           </div>

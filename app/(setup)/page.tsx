@@ -1,8 +1,10 @@
 import { HomeHeader } from "@/components/home/home-header";
 import { HomeSidebar } from "@/components/home/home-sidebar";
 import { NavigationSideBar } from "@/components/navigation/navigation-sidebar";
+import { initialProfile } from "@/lib/initial-profile";
 
 const SetupPage = async () => {
+  await initialProfile();
   return (
     <div className="h-full">
       <div className="fixed inset-y-0 z-30 hidden h-full w-[72px] flex-col md:flex">
