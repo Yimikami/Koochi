@@ -17,6 +17,7 @@ This file mainly contains the list of known issues and features that I am planni
 
 - [x] User can have separate direct messages with same users on different servers. I will try to fix this.
 - [ ] Improve the direct message system.
+- [ ] The starter of the conversation can delete other user's messages and the other user can't delete nor edit the messages. I will try to fix this.
 
 # Home Page
 
