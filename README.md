@@ -22,12 +22,12 @@ This is an ongoing project. There is still a lot of work to be done, and new fea
 
 ## Getting Started
 
+To get a local copy up and running follow these simple steps.
+
 ### Prerequisites
 
 - Node.js (v16.0.0 or higher)
 - npm or yarn
-
-To get a local copy up and running follow these simple steps.
 
 ### Installation
 
