@@ -4,11 +4,8 @@ export const getOrCreateConversation = async (
   memberOneId: string,
   memberTwoId: string,
 ) => {
-  console.log("ABI 0" + memberOneId + " + " + memberTwoId);
   const memberOneProfileId = await getProfileIdForMember(memberOneId);
   const memberTwoProfileId = await getProfileIdForMember(memberTwoId);
-
-  console.log("ABI 1" + memberOneProfileId + " + " + memberTwoProfileId);
 
   if (!memberOneProfileId || !memberTwoProfileId) {
     return null;
