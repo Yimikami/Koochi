@@ -10,7 +10,7 @@ import {
 
 import { useModal } from "@/hooks/use-modal-store";
 import { Button } from "@/components/ui/button";
-import { DoorOpen, Plus, PlusCircle } from "lucide-react";
+import { Plus } from "lucide-react";
 
 export const ServerModal = () => {
   const { isOpen, onClose, onOpen, type } = useModal();
