@@ -3,12 +3,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { DirectMessageMembers } from "./direct-message-members";
-import { currentProfile } from "@/lib/current-profile";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
+import { initialProfile } from "@/lib/initial-profile";
 
 export const HomeSidebar = async () => {
-  const profile = await currentProfile();
+  const profile = await initialProfile();
 
   if (!profile) {
     return redirect("/");
