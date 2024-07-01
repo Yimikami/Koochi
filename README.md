@@ -1,78 +1,61 @@
-Koochi is a Discord clone built with modern web technologies. It provides a platform for users to communicate in real-time through text channels, voice channels, and direct messages. This project is created using Next.js 14, React and other technologies.
+# Koochi
+
+Koochi is a Discord Clone project built with Next.js 14 and React, featuring real-time chat, video and audio communication, file uploading, and authentication.
+
+## Technologies Used
+
+- **Frontend:** Next.js 14, React
+- **Backend:** Prisma (Database), Socket.IO (Real-time Chat)
+- **Additional Services:** Livekit (Video and Audio Chat), Uploadthings (File Upload), Clerk (Authentication)
 
 ## Features
 
-- **Fully Customizable:** Create and customize your own server with a desired name and image, create text, voice and video channels, and invite friends to join.
-- **Real-time Messaging:** Send and receive messages in real-time. (WIP)
-- **Voice Channels:** Join voice channels and communicate with others. (WIP)
-- **User Authentication:** Secure login and registration.
-- **Responsive Design:** Optimized for both desktop and mobile devices.
-- **Dark Mode:** Toggle between light and dark mode.
-
-## Tech Stack
-
-- **Next.js 14:** Framework for server-rendered React applications.
-- **React:** JavaScript library for building user interfaces.
-- **Tailwind CSS:** Utility-first CSS framework for styling.
-- **Prisma:** ORM for database access.
-- **Clerk:** User authentication and authorization.
-- **Lucide:** SVG icons for the web.
-- **shadcn/ui:** Custom UI components.
-- **uploadthing**: File upload component.
-
-## Status
-
-This is an ongoing project. There is still a lot of work to be done, and new features will be added over time. Contributions and suggestions are welcome!
+- **Real-time Chat:** Utilizes Socket.IO for instant messaging between users.
+- **Video and Audio Chat:** Integrated Livekit for seamless voice and video calls.
+- **File Upload:** Allows users to upload files using Uploadthings.
+- **Authentication:** Uses Clerk for secure user authentication.
+- **Custom UI:** Inspired by Discord's interface with customizations for a unique user experience.
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js (v16.0.0 or higher)
-- npm or yarn
+To get a local copy up and running follow these simple steps.
 
 ### Installation
 
-1. Clone the repository:
-
-   ```bash
+1. Clone the repo
+   ```sh
    git clone https://github.com/Yimikami/Koochi.git
-   cd Koochi
    ```
-
-2. Install dependencies:
-
-   ```bash
+2. Install NPM packages
+   ```sh
    npm install
-   # or
-   yarn install
    ```
+3. Configure environment variables
 
-3. Set up your environment variables:
-   Copy the example environment file and update it with your own values:
-
-   ```bash
+   ```sh
    cp .env.example .env
    ```
 
-### Running the Application
+   Edit `.env` with your configuration details.
 
-1. Start the development server:
-
-   ```bash
+4. Start the development server
+   ```sh
    npm run dev
-   # or
-   yarn dev
    ```
-
-2. Open your browser and navigate to `http://localhost:3000`.
+5. Open your browser and navigate to `http://localhost:3000` to view Koochi.
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request.
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature-branch`)
-3. Commit your changes (`git commit -m 'Add some feature'`)
-4. Push to the branch (`git push origin feature-branch`)
-5. Open a pull request
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Acknowledgements
+
+- [Code with Antonio](https://www.youtube.com/watch?v=ZbX4Ok9YX94) - For the inspiring tutorial on building a Discord Clone.
+- Discord - For the inspiration behind the user interface design.
+- Open-source community - For the invaluable resources and contributions.

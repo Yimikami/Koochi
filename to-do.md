@@ -29,4 +29,4 @@ This file mainly contains the list of known issues and features that I am planni
 
 # ReadME
 
-- [ ] I will rewrite the README file.
+- [x] I will rewrite the README file.
