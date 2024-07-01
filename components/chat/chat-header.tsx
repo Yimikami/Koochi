@@ -33,9 +33,7 @@ export const ChatHeader = ({
           {name}
         </p>
       </div>
-      <div>
-        <MembersToggle serverId={serverId} />
-      </div>
+      <div>{serverId && <MembersToggle serverId={serverId} />}</div>
     </div>
   );
 };

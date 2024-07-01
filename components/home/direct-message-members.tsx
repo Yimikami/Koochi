@@ -1,34 +1,21 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Member, MemberRole, Profile, Server } from "@prisma/client";
-import { ShieldAlert, ShieldCheck } from "lucide-react";
+import { Member, Profile } from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
 import { UserAvatar } from "@/components/user-avatar";
 
 interface ServerMemberProps {
   member: Member & { profile: Profile };
-  server: Server;
   profileId: string;
 }
 
-const roleIconMap = {
-  [MemberRole.GUEST]: null,
-  [MemberRole.MODERATOR]: (
-    <ShieldCheck className="mr-2 h-4 w-4 text-indigo-500" />
-  ),
-  [MemberRole.ADMIN]: <ShieldAlert className="mr-2 h-4 w-4 text-rose-500" />,
-};
-
-export const ServerMember = ({
+export const DirectMessageMembers = ({
   member,
-  server,
   profileId,
 }: ServerMemberProps) => {
   const params = useParams();
   const router = useRouter();
-
-  const icon = roleIconMap[member.role];
 
   const onClick = () => {
     if (member.profile.id === profileId) {
@@ -60,7 +47,6 @@ export const ServerMember = ({
       >
         {member.profile.name}
       </p>
-      {icon}
     </button>
   );
 };

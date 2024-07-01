@@ -15,11 +15,12 @@ This file mainly contains the list of known issues and features that I am planni
 
 # Direct Messages
 
-- [ ] User can have separate direct messages with same users on different servers. I will try to fix this.
+- [x] User can have separate direct messages with same users on different servers. I will try to fix this.
+- [ ] Improve the direct message system.
 
 # Home Page
 
-- [ ] Users can see direct messages on the home page. (After fix the direct messages issue)
+- [x] Users can see direct messages on the home page. (After fix the direct messages issue)
 
 # ReadME
 

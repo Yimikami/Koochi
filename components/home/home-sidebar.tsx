@@ -2,8 +2,54 @@ import { BadgeDollarSign, Mail, Plus, Store, User } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { ActionTooltip } from "@/components/action-tooltip";
+import { DirectMessageMembers } from "./direct-message-members";
+import { currentProfile } from "@/lib/current-profile";
+import { redirect } from "next/navigation";
+import { db } from "@/lib/db";
 
-export const HomeSidebar = () => {
+export const HomeSidebar = async () => {
+  const profile = await currentProfile();
+
+  if (!profile) {
+    return redirect("/");
+  }
+
+  const conversations = await db.conversation.findMany({
+    where: {
+      OR: [
+        {
+          memberOne: {
+            profileId: profile.id,
+          },
+        },
+        {
+          memberTwo: {
+            profileId: profile.id,
+          },
+        },
+      ],
+    },
+    include: {
+      memberOne: {
+        include: {
+          profile: true,
+        },
+      },
+      memberTwo: {
+        include: {
+          profile: true,
+        },
+      },
+    },
+  });
+
+  const otherMembers = conversations.map((conversation) => {
+    if (conversation.memberOne.profileId === profile.id) {
+      return conversation.memberTwo;
+    }
+    return conversation.memberOne;
+  });
+
   return (
     <div className="flex h-full w-full flex-col bg-[#F2F3F5] text-primary dark:bg-[#2B2D31]">
       <div className="flex items-center justify-between">
@@ -67,7 +113,6 @@ export const HomeSidebar = () => {
             <p className="text-xs font-semibold uppercase text-zinc-500 dark:text-zinc-400">
               Direct Messages
             </p>
-
             <ActionTooltip label="Create DM" side="top">
               <button
                 className="text-zinc-500 transition hover:text-zinc-600 dark:text-zinc-400
@@ -77,6 +122,13 @@ export const HomeSidebar = () => {
               </button>
             </ActionTooltip>
           </div>
+          {otherMembers.map((member) => (
+            <DirectMessageMembers
+              key={member.id}
+              member={member}
+              profileId={profile.id}
+            />
+          ))}
         </div>
       </ScrollArea>
     </div>

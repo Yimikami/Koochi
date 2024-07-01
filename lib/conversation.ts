@@ -4,10 +4,19 @@ export const getOrCreateConversation = async (
   memberOneId: string,
   memberTwoId: string,
 ) => {
+  console.log("ABI 0" + memberOneId + " + " + memberTwoId);
+  const memberOneProfileId = await getProfileIdForMember(memberOneId);
+  const memberTwoProfileId = await getProfileIdForMember(memberTwoId);
+
+  console.log("ABI 1" + memberOneProfileId + " + " + memberTwoProfileId);
+
+  if (!memberOneProfileId || !memberTwoProfileId) {
+    return null;
+  }
 
   let conversation =
-    (await findConversation(memberOneId, memberTwoId)) ||
-    (await findConversation(memberTwoId, memberOneId));
+    (await findConversation(memberOneProfileId, memberTwoProfileId)) ||
+    (await findConversation(memberTwoProfileId, memberOneProfileId));
 
   if (!conversation) {
     conversation = await createNewConversation(memberOneId, memberTwoId);
@@ -16,11 +25,30 @@ export const getOrCreateConversation = async (
   return conversation;
 };
 
+const getProfileIdForMember = async (memberId: string) => {
+  try {
+    const member = await db.member.findUnique({
+      where: { id: memberId },
+      select: { profileId: true },
+    });
+    return member?.profileId;
+  } catch {
+    return null;
+  }
+};
+
 const findConversation = async (memberOneId: string, memberTwoId: string) => {
   try {
     return await db.conversation.findFirst({
       where: {
-        AND: [{ memberOneId: memberOneId }, { memberTwoId: memberTwoId }],
+        memberOne: {
+          profileId: memberOneId,
+        },
+        AND: {
+          memberTwo: {
+            profileId: memberTwoId,
+          },
+        },
       },
       include: {
         memberOne: {
