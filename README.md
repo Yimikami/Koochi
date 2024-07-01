@@ -16,7 +16,16 @@ Koochi is a Discord Clone project built with Next.js 14 and React, featuring rea
 - **Authentication:** Uses Clerk for secure user authentication.
 - **Custom UI:** Inspired by Discord's interface with customizations for a unique user experience.
 
+## Status
+
+This is an ongoing project. There is still a lot of work to be done, and new features will be added over time. Contributions and suggestions are welcome!
+
 ## Getting Started
+
+### Prerequisites
+
+- Node.js (v16.0.0 or higher)
+- npm or yarn
 
 To get a local copy up and running follow these simple steps.
 
