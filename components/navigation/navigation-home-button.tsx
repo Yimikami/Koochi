@@ -12,7 +12,7 @@ export const NavigationHomeButton = () => {
   };
   return (
     <div>
-      <ActionTooltip side="right" align="center" label="Koochi">
+      <ActionTooltip side="right" align="center" label="Direct Messages">
         <button onClick={onClick} className="group flex items-center">
           <div
             className="mx-3 flex h-[48px] w-[48px] items-center justify-center overflow-hidden

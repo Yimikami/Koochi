@@ -11,6 +11,7 @@ interface MemberIdPageProps {
   params: {
     memberId: string;
     serverId: string;
+    memberProfileId: string;
   };
 }
 
