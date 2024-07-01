@@ -12,7 +12,7 @@ import { useRouter, useParams } from "next/navigation";
 
 import Image from "next/image";
 
-import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
+import { Crown, Edit, FileIcon, ShieldCheck, Trash } from "lucide-react";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { UserAvatar } from "@/components/user-avatar";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
@@ -39,7 +39,7 @@ interface ChatItemProps {
 const roleIconMap = {
   GUEST: null,
   MODERATOR: <ShieldCheck className="ml-2 h-4 w-4 text-indigo-500" />,
-  ADMIN: <ShieldAlert className="ml-2 h-4 w-4 text-rose-500" />,
+  ADMIN: <Crown className="ml-2 h-4 w-4 text-yellow-500" />,
 };
 
 const formSchema = z.object({

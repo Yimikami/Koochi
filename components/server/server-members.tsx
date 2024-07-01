@@ -1,7 +1,7 @@
 "use client";
 
 import { Member, MemberRole, Profile, Server } from "@prisma/client";
-import { ShieldAlert, ShieldCheck } from "lucide-react";
+import { Crown, ShieldCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { UserAvatar } from "@/components/user-avatar";
 
@@ -16,7 +16,7 @@ const roleIconMap = {
   [MemberRole.MODERATOR]: (
     <ShieldCheck className="mr-2 h-4 w-4 text-indigo-500" />
   ),
-  [MemberRole.ADMIN]: <ShieldAlert className="mr-2 h-4 w-4 text-rose-500" />,
+  [MemberRole.ADMIN]: <Crown className="mr-2 h-4 w-4 text-yellow-500" />,
 };
 
 export const ServerMember = ({ member, profileId }: ServerMemberProps) => {
@@ -42,8 +42,8 @@ export const ServerMember = ({ member, profileId }: ServerMemberProps) => {
         className="h-8 w-8 md:h-8 md:w-8"
       />
       <p
-        className="text-sm font-semibold text-zinc-500 transition group-hover:text-zinc-600
-          dark:text-zinc-400 dark:group-hover:text-zinc-300"
+        className="text-sm font-semibold text-zinc-700 transition group-hover:text-zinc-900
+          dark:text-zinc-300 dark:group-hover:text-zinc-100"
       >
         {member.profile.name}
       </p>

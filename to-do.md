@@ -13,6 +13,10 @@ This file mainly contains the list of known issues and features that I am planni
 - [ ] Chat input and edit input don't scale based on the content. I will try to fix this.
 - [x] Edit input now has a emoji picker.
 
+# Server
+
+- [x] Members separated by roles.
+
 # Direct Messages
 
 - [x] User can have separate direct messages with same users on different servers. I will try to fix this.
