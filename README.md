@@ -1,5 +1,5 @@
 
-![Koochi](https://github.com/Yimikami/portfolio/blob/main/public/koochi.png?raw=true)
+![Koochi](https://utfs.io/f/9d689796-3b1a-4140-99ba-efe074139e6d-q4rzvd.png)
 
 Koochi is a Discord Clone project built with Next.js 14 and React, featuring real-time chat, video and audio communication, file uploading, and authentication.
 
