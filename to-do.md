@@ -4,7 +4,7 @@ This file mainly contains the list of known issues and features that I am planni
 
 # General
 
-- [ ] If user change profile picture via Clerk, it doesn't show up since imgUrl path no longer exist.
+- [ ] If user change profile picture via Clerk, it doesn't show up on user's end(but others can see it??)
 
 # Image Modal
 
