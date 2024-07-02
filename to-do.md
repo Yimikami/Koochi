@@ -2,6 +2,10 @@
 
 This file mainly contains the list of known issues and features that I am planning to implement in the future.
 
+# General
+
+- [ ] If user change profile picture via Clerk, it doesn't show up since imgUrl path no longer exist.
+
 # Image Modal
 
 - [ ] Large resolution images are not displayed properly in the image modal and chat. I will try to fix this.
