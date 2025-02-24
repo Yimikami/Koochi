@@ -11,7 +11,7 @@
 
 🚀 A feature-rich Discord clone built with modern web technologies
 
-[Demo](#) · [Report Bug](../../issues) · [Request Feature](../../issues)
+[Demo](https://koochi-orpin.vercel.app) · [Report Bug](../../issues) · [Request Feature](../../issues)
 
 </div>
 
