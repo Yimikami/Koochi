@@ -18,9 +18,9 @@ const ServerIdLayout = async (
   } = props;
 
   const profile = await currentProfile();
-
+  const { redirectToSignIn } = await auth();
   if (!profile) {
-    return auth().redirectToSignIn();
+    return redirectToSignIn();
   }
 
   const server = await db.server.findUnique({
@@ -32,10 +32,19 @@ const ServerIdLayout = async (
         },
       },
     },
+    include: {
+      channels: true,
+    },
   });
 
   if (!server) {
     return redirect("/");
+  }
+
+  // Ensure that the server data is consistent and does not change between renders
+  const initialChannel = server.channels[0];
+  if (!initialChannel || initialChannel.name !== "general") {
+    return null;
   }
 
   return (

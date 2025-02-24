@@ -12,9 +12,9 @@ interface InviteCodePageProps {
 const InviteCodePage = async (props: InviteCodePageProps) => {
   const params = await props.params;
   const profile = await currentProfile();
-
+  const { redirectToSignIn } = await auth();
   if (!profile) {
-    return auth().redirectToSignIn();
+    return redirectToSignIn();
   }
 
   if (!params.inviteCode) {

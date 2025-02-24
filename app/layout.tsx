@@ -22,9 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={cn(font.className, "bg-white dark:bg-[#313338]")}>
+    <ClerkProvider dynamic>
+      <html lang="en" className="dark" style={{colorScheme:"dark"}}>
+        <body className="bg-white dark:bg-[#313338]">
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"

@@ -18,9 +18,9 @@ interface ChannelIdPageProps {
 const ChannelIdPage = async (props: ChannelIdPageProps) => {
   const params = await props.params;
   const profile = await currentProfile();
-
+  const { redirectToSignIn } = await auth();
   if (!profile) {
-    return auth().redirectToSignIn();
+    return redirectToSignIn();
   }
 
   const channel = await db.channel.findUnique({

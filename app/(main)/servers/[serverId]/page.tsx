@@ -12,9 +12,9 @@ interface ServerIdPageProps {
 const ServerIdPage = async (props: ServerIdPageProps) => {
   const params = await props.params;
   const profile = await currentProfile();
-
+  const { redirectToSignIn } = await auth();
   if (!profile) {
-    return auth().redirectToSignIn();
+    return redirectToSignIn();
   }
 
   const server = await db.server.findUnique({
@@ -27,20 +27,16 @@ const ServerIdPage = async (props: ServerIdPageProps) => {
       },
     },
     include: {
-      channels: {
-        where: {
-          name: "general",
-        },
-        orderBy: {
-          createdAt: "asc",
-        },
-      },
+      channels: true,
     },
   });
 
-  const initialChannel = server?.channels[0];
+  if (!server) {
+    return redirect("/");
+  }
 
-  if (initialChannel?.name !== "general") {
+  const initialChannel = server.channels[0];
+  if (!initialChannel || initialChannel.name !== "general") {
     return null;
   }
   return redirect(`/servers/${params.serverId}/channels/${initialChannel?.id}`);
