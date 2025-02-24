@@ -1,8 +1,9 @@
 "use client";
 
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import Image from "next/image";
 import { useModal } from "@/hooks/use-modal-store";
+import { VisuallyHidden } from "@/components/ui/visually-hidden";
 
 export const OpenImageModal = () => {
   const { isOpen, onClose, type, data } = useModal();
@@ -13,6 +14,9 @@ export const OpenImageModal = () => {
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="flex items-center justify-center border-none bg-transparent p-4">
+        <DialogTitle>
+          <VisuallyHidden>Image Preview</VisuallyHidden>
+        </DialogTitle>
         {fileUrl && content ? (
           <div className="relative h-auto max-h-full w-auto max-w-full">
             <Image

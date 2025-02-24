@@ -20,7 +20,6 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
           <Image
             src={value}
             alt="Upload"
-            layout="intrinsic"
             width={300}
             height={300}
             className="object-contain"
@@ -81,7 +80,7 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
     <UploadDropzone
       endpoint={endpoint}
       onClientUploadComplete={(res) => {
-        onChange(res?.[0].url);
+        onChange(res?.[0].ufsUrl);
       }}
       onUploadError={(error: Error) => {
         console.error("Upload error: ", error);
