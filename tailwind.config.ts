@@ -75,7 +75,18 @@ const config = {
       },
     },
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [
+    tailwindcssAnimate,
+    function({ addUtilities }: { addUtilities: any }) {
+      const newUtilities = {
+        '.overflow-wrap-anywhere': {
+          'overflow-wrap': 'anywhere',
+          'word-break': 'break-word'
+        },
+      }
+      addUtilities(newUtilities)
+    }
+  ],
 } satisfies Config;
 
 export default config;

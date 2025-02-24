@@ -6,7 +6,7 @@ import qs from "query-string";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Member, MemberRole, Profile } from "@prisma/client";
 import { useRouter, useParams } from "next/navigation";
 
@@ -63,6 +63,7 @@ export const ChatItem = ({
   const { onOpen } = useModal();
   const params = useParams();
   const router = useRouter();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const onMemberClick = () => {
     if (member.id === currentMember.id) {
@@ -124,6 +125,31 @@ export const ChatItem = ({
   const canEditMessage = !deleted && isOwner && !fileUrl;
   const isPDF = fileType === "pdf" && fileUrl;
   const isImage = !isPDF && fileUrl;
+
+
+  const autoResizeTextarea = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  };
+
+  useEffect(() => {
+    if (isEditing) {
+      autoResizeTextarea();
+      const subscription = form.watch(() => {
+        setTimeout(autoResizeTextarea, 0);
+      });
+      return () => subscription.unsubscribe();
+    }
+  }, [form, isEditing]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      form.handleSubmit(onSubmit)();
+    }
+  };
 
   return (
     <div
@@ -194,29 +220,31 @@ export const ChatItem = ({
             </div>
           )}
           {!fileUrl && !isEditing && (
-            <p
-              className={cn(
-                "text-sm text-zinc-600 dark:text-zinc-300",
-                sameUser && "mt-0 pl-5",
-                deleted &&
-                  "mt-1 text-xs italic text-zinc-500 dark:text-zinc-400",
-              )}
-            >
-              {sameUser && (
-                <span
-                  className="mr-[7px] text-[10px] font-semibold text-white group-hover:text-zinc-600
-                    dark:text-[#313338] group-hover:dark:text-zinc-400 md:mr-[19px]"
-                >
-                  {timestamp}
-                </span>
-              )}
-              {content}
-              {isUpdated && !deleted && (
-                <span className="mx-2 text-[10px] text-zinc-500 dark:text-zinc-400">
-                  (edited)
-                </span>
-              )}
-            </p>
+            <div className="max-w-[calc(100%-40px)]">
+              <p
+                className={cn(
+                  "text-sm text-zinc-600 dark:text-zinc-300 break-words break-all",
+                  sameUser && "mt-0 pl-5",
+                  deleted &&
+                    "mt-1 text-xs italic text-zinc-500 dark:text-zinc-400",
+                )}
+              >
+                {sameUser && (
+                  <span
+                    className="mr-[7px] text-[10px] font-semibold text-white group-hover:text-zinc-600
+                      dark:text-[#313338] group-hover:dark:text-zinc-400 md:mr-[19px]"
+                  >
+                    {timestamp}
+                  </span>
+                )}
+                {content}
+                {isUpdated && !deleted && (
+                  <span className="mx-2 text-[10px] text-zinc-500 dark:text-zinc-400">
+                    (edited)
+                  </span>
+                )}
+              </p>
+            </div>
           )}
           {!fileUrl && isEditing && (
             <Form {...form}>
@@ -231,21 +259,31 @@ export const ChatItem = ({
                   control={form.control}
                   name="content"
                   render={({ field }) => (
-                    <FormItem className="flex-1">
+                    <FormItem className="flex-1 max-w-[calc(100%-80px)]">
                       <FormControl>
                         <div className="relative w-full">
-                          <Input
+                          <textarea
+                            ref={textareaRef}
                             disabled={isLoading}
-                            className="border-0 border-none bg-zinc-200/90 p-2 text-zinc-600 focus-visible:ring-0
-                              focus-visible:ring-offset-0 dark:bg-zinc-700/75 dark:text-zinc-200"
+                            className={cn(
+                              "resize-none w-full rounded-lg border-0 bg-zinc-200/90 p-2 text-zinc-600",
+                              "focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-zinc-700/75 dark:text-zinc-200",
+                              "min-h-[40px] max-h-[200px] overflow-y-auto break-words break-all"
+                            )}
                             placeholder="Edited message"
-                            {...field}
+                            rows={1}
+                            onKeyDown={handleKeyDown}
+                            value={field.value}
+                            onChange={field.onChange}
+                            onBlur={field.onBlur}
+                            name={field.name}
                           />
                           <div className="absolute right-2 top-2">
                             <EmojiPicker
-                              onChange={(emoji: string) =>
-                                field.onChange(`${field.value} ${emoji}`)
-                              }
+                              onChange={(emoji: string) => {
+                                field.onChange(`${field.value} ${emoji}`);
+                                setTimeout(autoResizeTextarea, 0);
+                              }}
                             />
                           </div>
                         </div>

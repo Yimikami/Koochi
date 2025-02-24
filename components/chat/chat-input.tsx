@@ -6,11 +6,12 @@ import axios from "axios";
 import qs from "query-string";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Plus } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
 import { EmojiPicker } from "@/components/emoji-picker";
 import { useRouter } from "next/navigation";
+import { useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
 interface ChatInputProps {
   apiUrl: string;
@@ -26,6 +27,7 @@ const formSchema = z.object({
 export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
   const { onOpen } = useModal();
   const router = useRouter();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,8 +49,33 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
 
       form.reset();
       router.refresh();
+      
+      if (textareaRef.current) {
+        textareaRef.current.style.height = "auto";
+      }
     } catch (error) {
       console.log(error);
+    }
+  };
+  const autoResizeTextarea = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  };
+
+  useEffect(() => {
+    const subscription = form.watch(() => {
+      setTimeout(autoResizeTextarea, 0);
+    });
+    return () => subscription.unsubscribe();
+  }, [form]);
+
+  // Handle key press for form submission
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      form.handleSubmit(onSubmit)();
     }
   };
 
@@ -71,19 +98,28 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
                   >
                     <Plus className="text-white dark:text-[#313338]" />
                   </button>
-                  <Input
+                  <textarea
+                    ref={textareaRef}
                     disabled={isLoading}
-                    className="rounded-lg border-0 bg-zinc-200/90 px-14 py-6 text-zinc-600 placeholder-zinc-400
-                      shadow-md focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-zinc-700/75
-                      dark:text-zinc-200"
+                    className={cn(
+                      "resize-none w-full rounded-lg border-0 bg-zinc-200/90 px-14 py-2 text-zinc-600 placeholder-zinc-400",
+                      "shadow-md focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-zinc-700/75 dark:text-zinc-200",
+                      "min-h-[60px] max-h-[200px] overflow-y-auto"
+                    )}
                     placeholder={`Message ${type === "conversation" ? name : "#" + name}`}
-                    {...field}
+                    rows={1}
+                    onKeyDown={handleKeyDown}
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    name={field.name}
                   />
                   <div className="absolute right-8 top-7">
                     <EmojiPicker
-                      onChange={(emoji: string) =>
-                        field.onChange(`${field.value} ${emoji}`)
-                      }
+                      onChange={(emoji: string) => {
+                        field.onChange(`${field.value} ${emoji}`);
+                        setTimeout(autoResizeTextarea, 0);
+                      }}
                     />
                   </div>
                 </div>
