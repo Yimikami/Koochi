@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider dynamic>
-      <html lang="en" className="dark" style={{colorScheme:"dark"}}>
+      <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
         <body className="bg-white dark:bg-[#313338]">
           <ThemeProvider
             attribute="class"
