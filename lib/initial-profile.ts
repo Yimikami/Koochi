@@ -16,6 +16,13 @@ export const initialProfile = async () => {
   });
 
   if (profile) {
+    // Update profile image if it's changed
+    if (profile.imageUrl !== user.imageUrl) {
+      await db.profile.update({
+        where: { id: profile.id },
+        data: { imageUrl: user.imageUrl },
+      });
+    }
     return profile;
   }
 

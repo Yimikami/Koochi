@@ -1,62 +1,78 @@
+# Koochi - A Modern Discord Clone
+
+<div align="center">
 
 ![Koochi](https://utfs.io/f/9d689796-3b1a-4140-99ba-efe074139e6d-q4rzvd.png)
 
-Koochi is a Discord Clone project built with Next.js 14 and React, featuring real-time chat, video and audio communication, file uploading, and authentication.
+[![Next.js](https://img.shields.io/badge/Next.js%2015-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)](https://socket.io/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
 
-## Technologies Used
+🚀 A feature-rich Discord clone built with modern web technologies
 
-- **Frontend:** Next.js 14, React
-- **Backend:** Prisma (Database), Socket.IO (Real-time Chat)
-- **Additional Services:** Livekit (Video and Audio Chat), Uploadthings (File Upload), Clerk (Authentication)
+[Demo](#) · [Report Bug](../../issues) · [Request Feature](../../issues)
 
-## Features
+</div>
 
-- **Real-time Chat:** Utilizes Socket.IO for instant messaging between users.
-- **Video and Audio Chat:** Integrated Livekit for seamless voice and video calls.
-- **File Upload:** Allows users to upload files using Uploadthings.
-- **Authentication:** Uses Clerk for secure user authentication.
-- **Custom UI:** Inspired by Discord's interface with customizations for a unique user experience.
+## ✨ Features
 
-## Status
+- 💬 **Real-time Chat** - Instant messaging powered by Socket.IO
+- 🎥 **Video & Audio Calls** - Crystal-clear communication via Livekit
+- 📁 **File Sharing** - Seamless file uploads with Uploadthings
+- 🔐 **Secure Authentication** - Robust user authentication using Clerk
+- 🎨 **Modern UI** - Sleek Discord-inspired interface with custom touches
+- 🌙 **Dark Mode** - Easy on the eyes, perfect for night owls
 
-This is an ongoing project. There is still a lot of work to be done, and new features will be added over time. Contributions and suggestions are welcome!
+## 🛠️ Built With
 
-## Getting Started
+### Core Technologies
 
-To get a local copy up and running follow these simple steps.
+- **Frontend Framework:** [Next.js 15](https://nextjs.org/)
+- **Database ORM:** [Prisma](https://www.prisma.io/)
+- **Real-time Engine:** [Socket.IO](https://socket.io/)
+
+### Additional Services
+
+- **Video/Audio:** [Livekit](https://livekit.io/)
+- **File Upload:** [Uploadthings](https://uploadthing.com/)
+- **Authentication:** [Clerk](https://clerk.dev/)
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
 - Node.js (v16.0.0 or higher)
-- npm or yarn
+- Package manager (npm, yarn, pnpm, or bun - we recommend bun)
 
 ### Installation
 
-1. Clone the repo
+1. Clone the repository
    ```sh
    git clone https://github.com/Yimikami/Koochi.git
    ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-3. Configure environment variables
 
+2. Install dependencies
+   ```sh
+   bun install
+   ```
+
+3. Set up environment variables
    ```sh
    cp .env.example .env
    ```
-
-   Edit `.env` with your configuration details.
+   Configure the `.env` file with your credentials
 
 4. Start the development server
    ```sh
-   npm run dev
+   bun run dev
    ```
-5. Open your browser and navigate to `http://localhost:3000` to view Koochi.
 
-## Contributing
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+## 🤝 Contributing
+
+Contributions make the open-source community an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -64,8 +80,20 @@ Contributions are what make the open-source community such an amazing place to l
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## Acknowledgements
+## 📝 Project Status
 
-- [Code with Antonio](https://www.youtube.com/watch?v=ZbX4Ok9YX94) - For the inspiring tutorial on building a Discord Clone.
-- Discord - For the inspiration behind the user interface design.
-- Open-source community - For the invaluable resources and contributions.
+This project is actively under development. New features and improvements are being added regularly. Feel free to check the [issues page](../../issues) for upcoming features or to report bugs.
+
+## 🙏 Acknowledgements
+
+- [Code with Antonio](https://www.youtube.com/watch?v=ZbX4Ok9YX94) - For the excellent Discord clone tutorial
+- [Discord](https://discord.com/) - For UI/UX inspiration
+- The amazing open-source community
+
+---
+
+<div align="center">
+
+Made with ❤️ by [Yimikami](https://github.com/Yimikami)
+
+</div>

@@ -5,13 +5,18 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-const ServerIdLayout = async ({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { serverId: string };
-}) => {
+const ServerIdLayout = async (
+  props: {
+    children: React.ReactNode;
+    params: Promise<{ serverId: string }>;
+  }
+) => {
+  const params = await props.params;
+
+  const {
+    children
+  } = props;
+
   const profile = await currentProfile();
 
   if (!profile) {
