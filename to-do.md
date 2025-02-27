@@ -12,7 +12,7 @@ This file mainly contains the list of known issues and features that I am planni
 
 # Chat
 
-- [ ] Links which contain images will be displayed automatically in the chat.
+- [X] Links which contain images will be displayed automatically in the chat.
 - [ ] Users can send GIFs in the chat.
 - [X] Chat input and edit input don't scale based on the content. I will try to fix this.
 - [X] Long messages should be wrapped.

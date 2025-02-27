@@ -16,7 +16,6 @@ import { Crown, Edit, FileIcon, ShieldCheck, Trash } from "lucide-react";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { UserAvatar } from "@/components/user-avatar";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/use-modal-store";
 import { EmojiPicker } from "../emoji-picker";
@@ -45,6 +44,8 @@ const roleIconMap = {
 const formSchema = z.object({
   content: z.string().min(1),
 });
+
+const imageUrlRegex = /(https?:\/\/.*?\.(?:png|jpg|jpeg|gif|bmp|webp|svg))/i;
 
 export const ChatItem = ({
   id,
@@ -126,6 +127,7 @@ export const ChatItem = ({
   const isPDF = fileType === "pdf" && fileUrl;
   const isImage = !isPDF && fileUrl;
 
+  const imageMatch = content.match(imageUrlRegex);
 
   const autoResizeTextarea = () => {
     if (textareaRef.current) {
@@ -206,6 +208,21 @@ export const ChatItem = ({
               />
             </a>
           )}
+          {imageMatch && (
+            <a
+              onClick={() => onOpen("openImage", { fileUrl: imageMatch[0], content })}
+              className="max-h-auto relative mt-2 flex max-w-[300px] items-center overflow-hidden
+                rounded-md border bg-secondary"
+            >
+              <Image
+                src={imageMatch[0]}
+                alt="Embedded image"
+                quality={100}
+                width={800}
+                height={600}
+              />
+            </a>
+          )}
           {isPDF && (
             <div className="relative mt-2 flex items-center rounded-md bg-background/10 p-2">
               <FileIcon className="h-10 w-10 fill-indigo-200 stroke-indigo-400" />
@@ -219,7 +236,7 @@ export const ChatItem = ({
               </a>
             </div>
           )}
-          {!fileUrl && !isEditing && (
+          {!imageMatch && !fileUrl && !isEditing && (
             <div className="max-w-[calc(100%-40px)]">
               <p
                 className={cn(
